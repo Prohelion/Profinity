@@ -1,14 +1,14 @@
-#Introduction to Profinity
+## Introduction to Profinity
 
 Profinity is a system management platform developed by Prohelion to manage our products and other systems built around a CAN Bus based architecture.
 
-Profinity is built around the concept of [profiles](https://doc.prohelion.com/Profinity/Profiles.html), which is a set of configured devices in your system.  By switching between profiles you can support multiple configurations across different sites of different combinations of technologies.
+Profinity is built around the concept of [profiles](https://docs.prohelion.com/Profinity/Profiles.html), which is a set of configured devices in your system.  By switching between profiles you can support multiple configurations across different sites of different combinations of technologies.
 
-![Profinity](https://doc.prohelion.com/images/Profinity/profinity_overview.png)
+![Profinity](https://docs.prohelion.com/images/Profinity/profinity_overview.png)
 
 Profinity can connect to CAN Bus adapters, which translate CAN Bus traffic from your network to the PC, you can send and receive CAN Bus messages, log messages and replay them.
 
-On top of this Profinity provides specialised tools for managing [Prohelion Batteries](https://doc.prohelion.com/Profinity/Prohelion_Batteries.html), MPPT systems from [Elmar Solar](https://doc.prohelion.com/Profinity/Elmar_Solar_MPPT.html) and [Tritium WaveSculpters](https://doc.prohelion.com/Profinity/Tritium_Wavesculpter.html) as well as any device that can be defined by a CAN DBC file.  
+On top of this Profinity provides specialised tools for managing [Prohelion Batteries](https://docs.prohelion.com/Profinity/Prohelion_Batteries.html), MPPT systems from [Elmar Solar](https://docs.prohelion.com/Profinity/Elmar_Solar_MPPT.html) and [Tritium WaveSculpters](https://docs.prohelion.com/Profinity/Tritium_Wavesculpter.html) as well as any device that can be defined by a CAN DBC file.  
 
 Over coming releases we will be extending our supported devices to include a range of chargers and other tools that are used in industry.
 
