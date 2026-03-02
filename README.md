@@ -45,7 +45,7 @@ A set of example applications is included to help you get started with Profinity
 
 Example apps include 
 
-- A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20)
+- A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20(Web))
 - A [cross-platform mobile app for a vehicle dashboard](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Vehicle%20Dashboard%20(Android%20%26%20iOS%20Mobile%20App))
 - Data science Battery Management examples for [Matlab](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Matlab%20Data%20Science%20using%20Prohelion%20BMS)
 - Data science Battery Management examples for [Python](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Python%20Data%20Science%20using%20Prohelion%20BMS)
