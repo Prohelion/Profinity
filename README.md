@@ -19,4 +19,41 @@ Profinity can connect to CAN Bus adapters, which translate CAN Bus traffic from 
 
 As well as providing extendable support for any CAN bus based solution, Profinity V2 provides specialised tools for managing [Prohelion Batteries](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Components/Battery_Management_Systems/index.html), MPPT systems from [Elmar Solar](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Components/MPPT/index.html) and [Prohelion WaveSculpters](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Components/Motor_Controller/index.html) as well as any device that can be defined by a CAN DBC file.  
 
-If you require support or assistance, please [Contact Us](https://www.prohelion.com/contact-us/) via the Prohelion Website or you can log bugs or requests for improvement on our [GitHub issues page](https://github.com/Prohelion/Profinity/issues)#
+## Download and Install
+
+### Windows
+
+| Installer | Documentation |
+| --------- | ------------- |
+| [Download Profinity V2 Early Adopter Release Installer](https://github.com/Prohelion/Profinity_V2_Early_Adopter_Release/releases/latest/download/Profinity.Install.msi) | [Windows Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Windows_Installation.html) |
+
+### Native Unix / macOS:
+
+| Installer | Documentation |
+| --------- | ------------- |
+| [Download Profinity V2 Early Adopter Release Zip](https://github.com/Prohelion/Profinity_V2_Early_Adopter_Release/releases/latest/download/Profinity.zip) | [Native macOS / Unix Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Zip_Installation.html) |
+
+### Docker
+
+| Documentation |
+| ------------- |
+| [Docker Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Docker_Installation.html) |
+
+## Example Profinity Extensions
+
+A set of example applications is included to help you get started with Profinity V2. These cover web, mobile, and data science use cases, demonstrating how to integrate with the Profinity API for real-time monitoring, data analysis, and custom solutions. 
+
+Example apps include a battery charging station web app, a cross-platform vehicle dashboard mobile app, and data science scripts for Matlab and Python.
+
+There is also a range of example scripts provided to get you started with Profinity scripting.
+
+## Documentation
+
+Full documentation for Profinity V2 is available at:
+[https://docs.prohelion.com/Profinity/Profinity_Version2/index.html](https://docs.prohelion.com/Profinity/Profinity_Version2/index.html)
+
+## Support
+
+- Visit our [Support Portal](https://support.prohelion.com/)
+- [Contact Us](https://prohelion.com/contact/)
+- Check our [FAQs](https://docs.prohelion.com/FAQs/index.html)
