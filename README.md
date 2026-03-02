@@ -43,9 +43,14 @@ As well as providing extendable support for any CAN bus based solution, Profinit
 
 A set of example applications is included to help you get started with Profinity V2. These cover web, mobile, and data science use cases, demonstrating how to integrate with the Profinity API for real-time monitoring, data analysis, and custom solutions. 
 
-Example apps include a battery charging station web app, a cross-platform vehicle dashboard mobile app, and data science scripts for Matlab and Python.
+Example apps include 
 
-There is also a range of example scripts provided to get you started with Profinity scripting.
+- A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20)
+- A [cross-platform mobile app for a vehicle dashboard](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Vehicle%20Dashboard%20(Android%20%26%20iOS%20Mobile%20App))
+- Data science Battery Management examples for [Matlab](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Matlab%20Data%20Science%20using%20Prohelion%20BMS)
+- Data science Battery Management examples for [Python](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Python%20Data%20Science%20using%20Prohelion%20BMS)
+
+There is also a range of [example scripts](https://github.com/Prohelion/Profinity/tree/master/Example%20Scripts) provided to get you started with Profinity scripting.
 
 ## Documentation
 
