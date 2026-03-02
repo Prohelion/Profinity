@@ -2,7 +2,7 @@
 
 Profinity V2 is a system management platform developed by Prohelion designed to be the most modern CAN bus management and development platform.
 
-You can find the [Prohelion Documentation](https://docs.prohelion.com/Profinity/Overview.html) on the docs site for the [latest Profinity release](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.install.msi).
+You can find the [Prohelion Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/index.html) on the docs site, or click to download the [latest Profinity release](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.install.msi) for Windows.
 
 Profinity V2, completely updates the capabilities of Prohelion's Profinity suite by adding:
 
@@ -10,7 +10,7 @@ Profinity V2, completely updates the capabilities of Prohelion's Profinity suite
 - Fully web enabled user interface that runs on desktop, mobile or Kiosk.
 - Full REST based API integration to allow easy extensions to Profinity's features and to build your own custom applications
 - Inbuilt Scripting support
-- Full ability to create custom dashboards, look and feel and add custom components
+- Full ability to create custom dashboards, look and feel and add custom custom components
 - Integration with AI and LLM tooling via MCP.
 
 ![Profinity](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/images/prohelion_bmu.png)
@@ -25,19 +25,19 @@ As well as providing extendable support for any CAN bus based solution, Profinit
 
 | Installer | Documentation |
 | --------- | ------------- |
-| [Download Profinity V2 Early Adopter Release Installer](https://github.com/Prohelion/Profinity_V2_Early_Adopter_Release/releases/latest/download/Profinity.Install.msi) | [Windows Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Windows_Installation.html) |
+| [Download Profinity V2 Installer](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.Install.msi) | [Windows Installation Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Installation/Windows_Installation.html) |
 
 ### Native Unix / macOS:
 
 | Installer | Documentation |
 | --------- | ------------- |
-| [Download Profinity V2 Early Adopter Release Zip](https://github.com/Prohelion/Profinity_V2_Early_Adopter_Release/releases/latest/download/Profinity.zip) | [Native macOS / Unix Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Zip_Installation.html) |
+| [Download Profinity V2 Zip](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.zip) | [Native macOS / Unix Installation Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Installation/Zip_Installation.html) |
 
 ### Docker
 
 | Documentation |
 | ------------- |
-| [Docker Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Docker_Installation.html) |
+| [Docker Installation Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Installation/Docker_Installation.html) |
 
 ## Example Profinity Extensions
 
@@ -46,7 +46,7 @@ A set of example applications is included to help you get started with Profinity
 Example apps include
 
 - A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20(Web))
-- An [Artificial Intelligence Chat web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Artificial%20Intelligence%20Chat%20(Web)) for querying Profinity via Ollama and MCP
+- An [Artificial Intelligence Chat web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Artificial%20Intelligence%20Chat%20(Web)) (MCP example) for querying Profinity via Ollama and the Model Context Protocol
 - A [cross-platform mobile app for a vehicle dashboard](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Vehicle%20Dashboard%20(Android%20%26%20iOS%20Mobile%20App))
 - Data science Battery Management examples for [Matlab](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Matlab%20Data%20Science%20using%20Prohelion%20BMS)
 - Data science Battery Management examples for [Python](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Python%20Data%20Science%20using%20Prohelion%20BMS)
