@@ -14,7 +14,7 @@ This is an example Python application demonstrating how to connect to the Prohel
 
 ```bash
 git clone [repository-url]
-cd "Prohelion Data Science using Prohelion BMS"
+cd "Python Data Science using Prohelion BMS"
 ```
 
 2. Install dependencies:

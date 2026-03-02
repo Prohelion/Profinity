@@ -1,8 +1,9 @@
 # Example Scripts
 
-This directory contains example scripts for three different programming languages: CSharp and Python. Each subdirectory demonstrates how to use the Profinity scripting environment in that language, including basic script execution, service lifecycle management, CAN bus communication, error handling, and cancellation. 
+This directory contains example scripts for C# and Python that run inside the Profinity scripting engine. Each language subdirectory includes two kinds of examples:
 
-These examples are intended to help developers get started with Profinity scripting and understand common patterns and error scenarios.
+- **Detailed script examples** — Match the templates shipped with the Profinity engine. They include extensive commented examples for CAN packet handling, DBC signals, script state, global state, cancellation, and related patterns. Use these when you want a single reference file with many patterns in one place.
+- **Simple examples** — Minimal, focused scripts for one concept each: stdout/stderr, send CAN, read CAN, read DBC signal, script state, global state (set/get), cancellation, run fail, run exit, errors. Use these for quick tests or when you only need one behaviour. These align with the script patterns used in Profinity tests.
 
 ## Subdirectories
 
@@ -10,13 +11,13 @@ These examples are intended to help developers get started with Profinity script
 
 **[CSharp/](CSharp/README.md)**
 
-Contains example C# scripts that showcase the use of the Profinity scripting API. The scripts demonstrate standard output and error handling, service lifecycle methods, CAN bus message sending and receiving, intentional errors, and script cancellation. Each script is documented in detail in the subdirectory's README.
+C# examples: detailed (Receive, Run, Service) and simple (StdOut, StdError, Send CAN, RunFail, MinimalService, FormatError, ExecutionError, Cancel). Each script is described in the subdirectory's README.
 
 ---
 
 **[Python/](Python/README.md)**
 
-Features example Python scripts that illustrate how to interact with the Profinity scripting API. The examples include basic script execution, service lifecycle management, CAN bus messaging, error handling, and cancellation. Each script is described in the subdirectory's README.
+Python examples: detailed (Receive, Run, Service) and simple (StdOut, StdError, Send CAN, RunFail, MinimalService, FormatError, ExecutionError, Cancel). Each script is described in the subdirectory's README.
 
 ---
 

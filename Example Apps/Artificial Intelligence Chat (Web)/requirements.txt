@@ -1,0 +1,28 @@
+# Artificial Intelligence Chat Dependencies
+# Install with: pip install -r requirements.txt
+# Or using UV (recommended): uv pip install -r requirements.txt
+
+# Web framework
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# Ollama integration
+langchain-ollama>=0.1.0
+
+# MCP Python SDK (REQUIRED - 1.20+ for mcp.server.fastmcp used by langchain-mcp-adapters)
+mcp>=1.20.0
+
+# HTTP client for MCP SDK (httpx is used by MCP SDK)
+httpx>=0.27.0
+
+# Markdown to HTML conversion
+markdown>=3.5.0
+
+# LangChain MCP adapters for tool binding (latest version with MCP SDK compatibility)
+langchain-mcp-adapters>=0.2.1
+
+# LangChain community tools (includes DuckDuckGo search and other tools)
+langchain-community>=0.3.0
+
+# Web search fallback (if langchain-community not available)
+ddgs>=1.0.0

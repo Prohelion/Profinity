@@ -3,11 +3,12 @@
 This repository contains several example applications that demonstrate the integration capabilities of the Profinity API and how you can use these APIs to develop custom website, mobile applications or do data science using Profinity as your back end datasource.
 
 1. **Battery Charging Station (Web Application)**
-2. **Vehicle Dashboard (Mobile Application)**
-3. **Matlab Data Science using Prohelion BMS (Matlab/Octave Example)**
-4. **Python Data Science using Prohelion BMS (Python Example)**
+2. **Artificial Intelligence Chat (Web Application)**
+3. **Vehicle Dashboard (Mobile Application)**
+4. **Matlab Data Science using Prohelion BMS (Matlab/Octave Example)**
+5. **Python Data Science using Prohelion BMS (Python Example)**
 
-All of these examples have been developed to use data from the supplied example PET Profile.  To get examples working load the PET Profile and reply the Example PET Can Log, putting the log in replay mode will keep the example CAN running.
+All of these examples have been developed to use data from the supplied example PET Profile.  To get examples working load the PET Profile and replay the Example PET CAN Log, putting the log in replay mode will keep the example CAN running.
 
 ## Battery Charging Station (Web Application)
 
@@ -22,6 +23,20 @@ A web application that demonstrates how to integrate Profinity APIs with Square'
 - Detailed logging of power consumption and associated costs
 
 [View detailed documentation](Charge%20for%20Power%20using%20Square%20(Web)/README.md)
+
+## Artificial Intelligence Chat (Web Application)
+
+A web application that provides a chat interface for querying Profinity data using natural language. It uses Ollama for local LLM inference and connects to Profinity via MCP (Model Context Protocol) so you can ask questions about components, signals, and historical data.
+
+![Artificial Intelligence Chat Screenshot](Artificial%20Intelligence%20Chat%20(Web)/AI_Example.png)
+
+### Key Features
+- Natural language queries about Profinity data
+- MCP integration for Profinity components, signals, and metadata
+- Login via the web UI or optional token for headless use
+- Works with any Ollama model that supports tool calling (e.g. qwen3:14b, llama3.2)
+
+[View detailed documentation](Artificial%20Intelligence%20Chat%20(Web)/README.md)
 
 ## Vehicle Dashboard (Mobile Application)
 
@@ -117,6 +132,12 @@ Additional requirements for each application:
 - **Python Data Science using Prohelion BMS:**
   - Python 3.7 or later
   - pip (for installing dependencies)
+
+- **Artificial Intelligence Chat (Web):**
+  - Python 3.12 or later
+  - Ollama installed and running
+  - An Ollama model that supports tool calling (e.g. qwen3:14b)
+  - Profinity running with MCP enabled
 
 ## License
 

@@ -1,69 +1,83 @@
 # Python Example Scripts
 
-This directory contains example Python scripts demonstrating various features and error cases for the Profinity scripting environment. Each script is described below:
+This directory contains example Python scripts for the Profinity scripting environment, in two groups: **detailed** (template-style, with many commented examples) and **simple** (minimal, one concept per script).
 
 ---
 
-**[PythonStdOutExample.py](PythonStdOutExample.py)**
+## Detailed script examples
 
-Demonstrates how to write a message to standard output (STDOUT) using the `print` function. Useful for testing output capture and logging.
-
----
-
-**[PythonStdErrorExample.py](PythonStdErrorExample.py)**
-
-Shows how to write a message to standard error (STDERR) using a custom function that prints to `sys.stderr`. This is helpful for testing error output handling.
-
----
-
-**[PythonServiceExample.py](PythonServiceExample.py)**
-
-Implements a full-featured Profinity service with start, stop, pause, continue, and shutdown lifecycle methods. Each method logs its action to the console, making it a good template for service-based scripts.
-
----
-
-**[PythonSendCANMessage.py](PythonSendCANMessage.py)**
-
-Demonstrates sending a CAN bus message using the Profinity CANBus API. It creates a CAN packet, sets some data fields, and sends it, serving as a reference for CAN communication.
-
----
-
-**[PythonRunExample.py](PythonRunExample.py)**
-
-A simple runnable script that prints a message and the current Profinity message to the console. Useful for basic script execution and message passing tests.
-
----
-
-**[PythonRunFailExample.py](PythonRunFailExample.py)**
-
-Illustrates a script that intentionally exits with a non-zero status to simulate a failure scenario. It prints a message before failing.
-
----
+These match the templates shipped with the Profinity engine and include extensive commented examples for CAN, DBC, state, and related patterns.
 
 **[PythonReceiveExample.py](PythonReceiveExample.py)**
 
-Shows how to implement a receiver script that reacts to incoming CAN packets. It prints the received CAN ID in hexadecimal format to the console.
+Receiver script that reacts to incoming CAN packets. Includes commented examples for reading packet data, sending responses, DBC signals, script state, global state, and filtering by packet content.
+
+**[PythonRunExample.py](PythonRunExample.py)**
+
+Runnable script (run on demand or scheduled). Includes commented examples for reading CAN packets, sending CAN, DBC signals, state, global state, and script cancellation in loops.
+
+**[PythonServiceExample.py](PythonServiceExample.py)**
+
+Service script with `on_start`, `on_stop`, `on_pause`, and `on_continue`. Includes a working `run()` example (log every second) and a commented alternative `run()` with an internal loop and cancellation checks.
 
 ---
+
+## Simple examples
+
+Minimal scripts, each focused on a single behaviour or scenario.
+
+**[PythonStdOutExample.py](PythonStdOutExample.py)**
+
+Writes a message to the script console using `print`. For testing output capture and logging.
+
+**[PythonStdErrorExample.py](PythonStdErrorExample.py)**
+
+Writes a message to standard error (STDERR). For testing error output handling.
+
+**[PythonSendCANMessage.py](PythonSendCANMessage.py)**
+
+Creates a CAN packet, sets data fields, and sends it. Minimal reference for sending CAN messages.
+
+**[PythonReadCANMessageExample.py](PythonReadCANMessageExample.py)**
+
+Gets the latest received CAN packet for a given ID via `LatestValidPacketReceivedByID`, then prints ID and data.
+
+**[PythonReadDBCSignalExample.py](PythonReadDBCSignalExample.py)**
+
+Reads a DBC signal via `Profinity.DBC.GetDbcSignal`. Uses TestDBCComponent / STW_ANGLHP_STAT / StW_AnglHP (same as Profinity test scripts). For a self-contained run with data, run CSharpReadDBCSignalExample first to inject CAN. Matches Profinity test script PythonDBCTest.
+
+**[PythonStateExample.py](PythonStateExample.py)**
+
+Sets and gets both local script state (`Profinity.State`) and global state (`Profinity.GlobalState`). Matches Profinity test script PythonStateTest.
+
+**[PythonGlobalStateSetExample.py](PythonGlobalStateSetExample.py)**
+
+Sets a value in GlobalState for another script to read. Run with PythonGlobalStateGetExample (or C# equivalent) to test inter-script sharing. Matches Profinity test script PythonInterscriptSetTest.
+
+**[PythonGlobalStateGetExample.py](PythonGlobalStateGetExample.py)**
+
+Reads a value from GlobalState set by another script. Run PythonGlobalStateSetExample first (or C# equivalent). Matches Profinity test script PythonInterscriptGetTest.
+
+**[PythonRunExitExample.py](PythonRunExitExample.py)**
+
+Runnable script that prints a message then exits with `sys.exit(0)`. For testing exit-code handling. Matches Profinity test script PythonRunExitTest.
+
+**[PythonRunFailExample.py](PythonRunFailExample.py)**
+
+Intentionally exits with a non-zero status to simulate a failure. For testing failure handling.
 
 **[PythonMinimalServiceExample.py](PythonMinimalServiceExample.py)**
 
-A minimal example of a Profinity service, implementing only the `on_start` method. It prints a message when started, serving as a lightweight service template.
-
----
+Minimal service with only `on_start` implemented. Lightweight starting point for service scripts.
 
 **[PythonFormatErrorExample.py](PythonFormatErrorExample.py)**
 
-Contains a deliberate syntax error (invalid function definition) to demonstrate how the system handles format or compilation errors in scripts.
-
----
+Contains a deliberate syntax error to show how the engine reports format/compilation errors.
 
 **[PythonExecutionErrorExample.py](PythonExecutionErrorExample.py)**
 
-Throws an exception during execution to simulate a runtime error. Useful for testing error handling and reporting in the scripting environment.
-
----
+Throws an exception during execution. For testing runtime error handling and reporting.
 
 **[PythonCancelExample.py](PythonCancelExample.py)**
 
-Demonstrates how to handle script cancellation. The script enters a loop, periodically checking if it has been cancelled, and prints its state until cancellation occurs. 
+Loop that checks `Profinity.ScriptCancelled` and prints state until cancellation. For testing cancellation behaviour. 

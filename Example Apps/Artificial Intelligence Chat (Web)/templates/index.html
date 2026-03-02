@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profinity Ollama MCP Agent Example</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        /* Profinity Color Variables from _variables.scss */
+        :root {
+            --color-white: #fff;
+            --color-black: #000;
+            --color-prohelion-blue: #232c3a;
+            --color-prohelion-grey-blue: #6b7482;
+            --color-grey-dark: #555;
+            --color-grey-dark-less1: #666;
+            --color-grey-light: #eaeaea;
+            --color-grey-lighter: #f1f1f1;
+            --color-grey-lighter2: #f7f7f7;
+            --color-grey-lighter3: #f9f9f9;
+            --color-grey-lighter4: #fcfcfc;
+            --color-info: #1976d2;
+            --color-info-light: rgba(25, 118, 210, 0.5);
+            --color-info-lighter: rgba(25, 118, 210, 0.1);
+            --color-success: #2eb757;
+            --color-success-light: rgba(46, 183, 87, 0.5);
+            --color-success-lighter: rgba(46, 183, 87, 0.1);
+            --color-error: #d32f2f;
+            --color-error-light: rgba(211, 47, 47, 0.5);
+            --color-error-lighter: rgba(211, 47, 47, 0.1);
+            --color-shadow-light: rgba(0, 0, 0, 0.33);
+            --color-shadow-dark: rgba(0, 0, 0, 0.5);
+            --radius-small: 5px;
+            --radius-medium: 25px;
+            --font-size-normal: 0.875rem; /* 14px */
+            --font-size-sm: 0.75rem; /* 12px */
+            --font-size-lg: 1.125rem; /* 18px */
+            --spacing-normal: 0.625rem; /* 10px */
+            --spacing-lg: 0.938rem; /* 15px */
+            --spacing-xl: 1.25rem; /* 20px */
+        }
+
+        @font-face {
+            font-family: 'Avenir Next Condensed';
+            src: url('/static/fonts/Avenir Next/AvenirNextCondensed-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Avenir Next Condensed';
+            src: url('/static/fonts/Avenir Next/AvenirNextCondensed-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Avenir Next Condensed';
+            src: url('/static/fonts/Avenir Next/AvenirNextCondensed-Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Avenir Next Condensed', Arial, sans-serif;
+            font-size: var(--font-size-normal);
+            font-weight: 400;
+            line-height: 0.875rem;
+            letter-spacing: 0.044rem;
+            color: var(--color-grey-dark);
+            margin: 0 10%;
+            padding: var(--spacing-xl);
+            background-color: var(--color-grey-lighter);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: var(--color-prohelion-blue);
+            color: var(--color-white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-small);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: 0 2px 4px var(--color-shadow-light);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .header__logo {
+            height: 46px;
+            width: auto;
+        }
+
+        .header__content {
+            flex: 1;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            line-height: 1.125rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .header p {
+            margin: var(--spacing-normal) 0 0 0;
+            font-size: var(--font-size-normal);
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .config-panel {
+            background-color: var(--color-white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-small);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: 0 2px 4px var(--color-shadow-light);
+        }
+
+        .model-selector {
+            margin-bottom: var(--spacing-normal);
+        }
+
+        .model-selector label {
+            font-weight: 700;
+            margin-right: var(--spacing-normal);
+            color: var(--color-grey-dark);
+        }
+
+        .model-selector select {
+            padding: var(--spacing-normal);
+            border: 1px solid var(--color-grey-light);
+            border-radius: var(--radius-small);
+            font-size: var(--font-size-normal);
+            font-family: 'Avenir Next Condensed', Arial, sans-serif;
+            color: var(--color-grey-dark);
+            background-color: var(--color-white);
+        }
+
+        .status {
+            font-size: var(--font-size-sm);
+            color: var(--color-grey-dark-less1);
+            margin-top: var(--spacing-normal);
+        }
+
+        .chat-container {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-grey-light);
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-normal);
+            border-radius: var(--radius-small);
+            box-shadow: 0 2px 4px var(--color-shadow-light);
+        }
+
+        .message {
+            margin: var(--spacing-normal) 0;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-small);
+            max-width: 80%;
+            word-wrap: break-word;
+            font-size: var(--font-size-normal);
+            line-height: 1.4;
+        }
+
+        /* Markdown styling */
+        .message h1, .message h2, .message h3, .message h4, .message h5, .message h6 {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-normal);
+            font-weight: 700;
+            color: var(--color-grey-dark);
+        }
+
+        .message h1 {
+            font-size: var(--font-size-lg);
+        }
+
+        .message h2 {
+            font-size: var(--font-size-normal);
+        }
+
+        .message p {
+            margin: var(--spacing-normal) 0;
+        }
+
+        .message ul, .message ol {
+            margin: var(--spacing-normal) 0;
+            padding-left: var(--spacing-xl);
+        }
+
+        .message li {
+            margin: var(--spacing-normal) 0;
+        }
+
+        .message code {
+            background-color: var(--color-grey-lighter);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        .message pre {
+            background-color: var(--color-grey-lighter);
+            padding: var(--spacing-normal);
+            border-radius: var(--radius-small);
+            overflow-x: auto;
+            margin: var(--spacing-normal) 0;
+        }
+
+        .message pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .message blockquote {
+            border-left: 3px solid var(--color-info);
+            padding-left: var(--spacing-normal);
+            margin: var(--spacing-normal) 0;
+            color: var(--color-grey-dark-less1);
+            font-style: italic;
+        }
+
+        .message table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: var(--spacing-normal) 0;
+        }
+
+        .message table th,
+        .message table td {
+            border: 1px solid var(--color-grey-light);
+            padding: var(--spacing-normal);
+            text-align: left;
+        }
+
+        .message table th {
+            background-color: var(--color-grey-lighter);
+            font-weight: 700;
+        }
+
+        .message a {
+            color: var(--color-info);
+            text-decoration: none;
+        }
+
+        .message a:hover {
+            text-decoration: underline;
+        }
+
+        .message strong {
+            font-weight: 700;
+        }
+
+        .message em {
+            font-style: italic;
+        }
+
+        .user-message {
+            background-color: var(--color-info-lighter);
+            border: 1px solid var(--color-info-light);
+            margin-left: auto;
+            text-align: right;
+            color: var(--color-grey-dark);
+        }
+
+        .assistant-message {
+            background-color: var(--color-grey-lighter2);
+            border: 1px solid var(--color-grey-light);
+            margin-right: auto;
+            color: var(--color-grey-dark);
+        }
+
+        .mcp-badge {
+            display: inline-block;
+            background-color: var(--color-success);
+            color: var(--color-white);
+            font-size: var(--font-size-sm);
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: var(--spacing-normal);
+        }
+
+        .input-container {
+            display: flex;
+            gap: var(--spacing-normal);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: var(--spacing-lg);
+            border: 1px solid var(--color-grey-light);
+            border-radius: var(--radius-small);
+            font-size: var(--font-size-normal);
+            font-family: 'Avenir Next Condensed', Arial, sans-serif;
+            color: var(--color-grey-dark);
+            background-color: var(--color-white);
+            box-shadow: inset 0px 3px 15px var(--color-shadow-dark);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--color-info);
+        }
+
+        button {
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background-color: var(--color-prohelion-blue);
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+            border-radius: var(--radius-medium);
+            cursor: pointer;
+            font-size: var(--font-size-normal);
+            font-family: 'Avenir Next Condensed', Arial, sans-serif;
+            font-weight: 700;
+            box-shadow: inset 0px 3px 15px var(--color-shadow-dark);
+            transition: background-color 0.25s;
+        }
+
+        button:hover {
+            background-color: var(--color-info);
+        }
+
+        button:disabled {
+            background-color: var(--color-grey-light);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        #clearButton {
+            background-color: var(--color-grey-dark);
+            border: 2px solid var(--color-white);
+        }
+
+        #clearButton:hover {
+            background-color: var(--color-error);
+        }
+
+        .error {
+            color: var(--color-error);
+            background-color: var(--color-error-lighter);
+            border: 1px solid var(--color-error-light);
+            padding: var(--spacing-normal);
+            border-radius: var(--radius-small);
+            margin: var(--spacing-normal) 0;
+            font-size: var(--font-size-normal);
+        }
+
+        .login-form {
+            background-color: var(--color-white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-small);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: 0 2px 4px var(--color-shadow-light);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .login-form h2 {
+            margin: 0 0 var(--spacing-lg) 0;
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--color-grey-dark);
+            text-align: center;
+        }
+
+        .login-form .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .login-form label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: var(--spacing-normal);
+            color: var(--color-grey-dark);
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: var(--spacing-lg);
+            border: 1px solid var(--color-grey-light);
+            border-radius: var(--radius-small);
+            font-size: var(--font-size-normal);
+            font-family: 'Avenir Next Condensed', Arial, sans-serif;
+            color: var(--color-grey-dark);
+            background-color: var(--color-white);
+            box-shadow: inset 0px 3px 15px var(--color-shadow-dark);
+        }
+
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            outline: none;
+            border-color: var(--color-info);
+        }
+
+        .login-form button {
+            width: 100%;
+            margin-top: var(--spacing-lg);
+        }
+
+        .logout-button {
+            background-color: var(--color-error);
+            border: 2px solid var(--color-white);
+            margin-left: var(--spacing-normal);
+        }
+
+        .logout-button:hover {
+            background-color: var(--color-error-light);
+        }
+
+        .header__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-normal);
+        }
+
+        .header__user {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .thinking-spinner {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-normal);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-normal) 0;
+            color: var(--color-grey-dark-less1);
+            font-size: var(--font-size-normal);
+            font-style: italic;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--color-grey-light);
+            border-top-color: var(--color-info);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/static/images/profinity-logo.svg" alt="Profinity Logo" class="header__logo">
+        <div class="header__content">
+            <h1>Profinity Ollama MCP Agent Example</h1>
+            <p>Query Profinity data using natural language with AI assistance</p>
+        </div>
+        <div class="header__actions">
+            <span id="usernameDisplay" class="header__user hidden"></span>
+            <button id="logoutButton" class="logout-button hidden" onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+    
+    <div id="loginForm" class="login-form hidden">
+        <h2>Login to Profinity</h2>
+        <div class="form-group">
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" placeholder="Enter username" />
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" />
+        </div>
+        <div id="loginError" class="error hidden"></div>
+        <button id="loginButton" onclick="handleLogin()">Login</button>
+    </div>
+    
+    <div class="config-panel hidden">
+        <div class="model-selector">
+            <label>Ollama Model: </label>
+            <select id="modelSelect">
+                <option value="">Loading models...</option>
+            </select>
+        </div>
+        <div class="status" id="status">Ready</div>
+    </div>
+    
+    <div id="chatContainer" class="chat-container hidden"></div>
+    
+    <div class="input-container hidden">
+        <input type="text" id="messageInput" placeholder="Ask about Profinity data... (e.g., 'What components are available?  Use keywords like Profinity, Profile or your component names.')" />
+        <button id="sendButton" onclick="sendMessage()">Send</button>
+        <button id="clearButton" onclick="clearHistory()" title="Clear conversation history">Clear</button>
+    </div>
+    
+    <script>
+        let isLoading = false;
+        let messageHistory = []; // Store message history for arrow key navigation
+        let historyIndex = -1; // Current position in history (-1 means at the end/new message)
+        let isAuthenticated = false;
+        let canLogout = false;
+        
+        // Check authentication status on page load
+        function checkAuthStatus() {
+            fetch('/api/auth/status', {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then(r => r.json())
+            .then(data => {
+                isAuthenticated = data.is_authenticated;
+                canLogout = data.can_logout;
+                
+                const loginForm = document.getElementById('loginForm');
+                const logoutButton = document.getElementById('logoutButton');
+                const usernameDisplay = document.getElementById('usernameDisplay');
+                const configPanel = document.querySelector('.config-panel');
+                const chatContainer = document.getElementById('chatContainer');
+                const inputContainer = document.querySelector('.input-container');
+                
+                if (isAuthenticated) {
+                    // Hide login form, show main UI
+                    loginForm.classList.add('hidden');
+                    configPanel.classList.remove('hidden');
+                    chatContainer.classList.remove('hidden');
+                    inputContainer.classList.remove('hidden');
+                    
+                    // Show logout button and username if logged in via form
+                    if (canLogout && data.username) {
+                        logoutButton.classList.remove('hidden');
+                        usernameDisplay.textContent = `Logged in as: ${data.username}`;
+                        usernameDisplay.classList.remove('hidden');
+                    } else {
+                        logoutButton.classList.add('hidden');
+                        usernameDisplay.classList.add('hidden');
+                    }
+                    
+                    // Load models if authenticated
+                    loadModels();
+                } else {
+                    // Show login form, hide main UI
+                    loginForm.classList.remove('hidden');
+                    configPanel.classList.add('hidden');
+                    chatContainer.classList.add('hidden');
+                    inputContainer.classList.add('hidden');
+                    logoutButton.classList.add('hidden');
+                    usernameDisplay.classList.add('hidden');
+                    
+                    // Reset login button state
+                    const loginButton = document.getElementById('loginButton');
+                    if (loginButton) {
+                        loginButton.disabled = false;
+                        loginButton.textContent = 'Login';
+                    }
+                    
+                    // Clear any error messages
+                    const loginError = document.getElementById('loginError');
+                    if (loginError) {
+                        loginError.classList.add('hidden');
+                        loginError.textContent = '';
+                    }
+                    
+                    // Clear username and password fields
+                    const loginUsername = document.getElementById('loginUsername');
+                    const loginPassword = document.getElementById('loginPassword');
+                    if (loginUsername) loginUsername.value = '';
+                    if (loginPassword) loginPassword.value = '';
+                }
+            })
+            .catch(err => {
+                console.error('Error checking auth status:', err);
+                // On error, show login form
+                document.getElementById('loginForm').classList.remove('hidden');
+            });
+        }
+        
+        function handleLogin() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const errorDiv = document.getElementById('loginError');
+            const loginButton = document.getElementById('loginButton');
+            
+            if (!username || !password) {
+                errorDiv.textContent = 'Please enter both username and password';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            errorDiv.classList.add('hidden');
+            loginButton.disabled = true;
+            loginButton.textContent = 'Logging in...';
+            
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include',
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(r => {
+                if (!r.ok) {
+                    return r.json().then(data => {
+                        throw new Error(data.error || `HTTP ${r.status}: ${r.statusText}`);
+                    });
+                }
+                return r.json();
+            })
+            .then(data => {
+                // Clear password field
+                document.getElementById('loginPassword').value = '';
+                // Refresh auth status to update UI
+                checkAuthStatus();
+            })
+            .catch(err => {
+                const errorMsg = err.message || 'Login failed';
+                errorDiv.textContent = errorMsg;
+                errorDiv.classList.remove('hidden');
+                loginButton.disabled = false;
+                loginButton.textContent = 'Login';
+            });
+        }
+        
+        function handleLogout() {
+            if (!confirm('Are you sure you want to logout?')) {
+                return;
+            }
+            
+            const logoutButton = document.getElementById('logoutButton');
+            logoutButton.disabled = true;
+            logoutButton.textContent = 'Logging out...';
+            
+            fetch('/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            })
+            .then(r => r.json())
+            .then(data => {
+                // Clear password field
+                document.getElementById('loginPassword').value = '';
+                // Refresh auth status to update UI
+                checkAuthStatus();
+            })
+            .catch(err => {
+                console.error('Logout error:', err);
+                // Still refresh UI even if logout request failed
+                checkAuthStatus();
+            })
+            .finally(() => {
+                logoutButton.disabled = false;
+                logoutButton.textContent = 'Logout';
+            });
+        }
+        
+        // Allow Enter key in login form
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginUsername = document.getElementById('loginUsername');
+            const loginPassword = document.getElementById('loginPassword');
+            
+            if (loginUsername) {
+                loginUsername.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleLogin();
+                    }
+                });
+            }
+            
+            if (loginPassword) {
+                loginPassword.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleLogin();
+                    }
+                });
+            }
+        });
+        
+        // Check auth status on page load
+        checkAuthStatus();
+        
+        // Load models on page load (only if authenticated)
+        function loadModels() {
+            fetch('/api/models')
+                .then(r => {
+                    if (!r.ok) {
+                        throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+                    }
+                    return r.json();
+                })
+                .then(data => {
+                    const select = document.getElementById('modelSelect');
+                    if (!select) return;
+                    select.innerHTML = '';
+                    if (data.models && data.models.length > 0) {
+                        data.models.forEach(model => {
+                            const option = document.createElement('option');
+                            option.value = model.name;
+                            option.text = model.name;
+                            select.appendChild(option);
+                        });
+                        updateStatus('Models loaded');
+                    } else {
+                        select.innerHTML = '<option value="">No models found</option>';
+                        updateStatus('No Ollama models found. Make sure Ollama is running.');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading models:', err);
+                    const errorMsg = err.message || 'Unknown error';
+                    updateStatus(`Error loading models: ${errorMsg}. Make sure Ollama is installed and running.`);
+                    // Show error in UI
+                    const container = document.getElementById('chatContainer');
+                    if (container) {
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'error';
+                        errorDiv.textContent = `Failed to load models: ${errorMsg}`;
+                        container.appendChild(errorDiv);
+                    }
+                });
+        }
+        
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+        }
+        
+        function clearHistory() {
+            if (isLoading) return;
+            
+            // Confirm with user
+            if (!confirm('Clear conversation history? This will remove all previous messages from the current session.')) {
+                return;
+            }
+            
+            const clearButton = document.getElementById('clearButton');
+            clearButton.disabled = true;
+            clearButton.textContent = 'Clearing...';
+            updateStatus('Clearing conversation history...');
+            
+            fetch('/api/clear-history', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include'
+            })
+            .then(r => {
+                if (!r.ok) {
+                    return r.json().then(data => {
+                        throw new Error(data.error || `HTTP ${r.status}: ${r.statusText}`);
+                    });
+                }
+                return r.json();
+            })
+            .then(data => {
+                // Clear the displayed messages
+                const container = document.getElementById('chatContainer');
+                container.innerHTML = '';
+                
+                // Reset message history for arrow key navigation
+                messageHistory = [];
+                historyIndex = -1;
+                
+                updateStatus('Conversation history cleared');
+                clearButton.textContent = 'Clear';
+                clearButton.disabled = false;
+            })
+            .catch(err => {
+                const errorMsg = err.message || 'Unknown error occurred';
+                updateStatus('Error clearing history: ' + errorMsg);
+                clearButton.textContent = 'Clear';
+                clearButton.disabled = false;
+                console.error('Clear history error:', err);
+            });
+        }
+        
+        function sendMessage() {
+            if (!isAuthenticated) {
+                updateStatus('Please login first');
+                return;
+            }
+            
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            const model = document.getElementById('modelSelect').value;
+            const sendButton = document.getElementById('sendButton');
+            
+            if (!message || isLoading) return;
+            
+            if (!model) {
+                updateStatus('Please select a model first');
+                return;
+            }
+            
+            // Disable input while processing
+            isLoading = true;
+            input.disabled = true;
+            sendButton.disabled = true;
+            sendButton.textContent = 'Sending...';
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            
+            // Show thinking spinner
+            showThinkingSpinner();
+            
+            // Save message to history (only if not empty and not a duplicate of the last message)
+            if (messageHistory.length === 0 || messageHistory[messageHistory.length - 1] !== message) {
+                messageHistory.push(message);
+            }
+            historyIndex = -1; // Reset to end of history
+            input.value = '';
+            updateStatus('Processing query...');
+            
+            // Send to backend (conversation history is managed server-side via Flask sessions)
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include', // Include cookies for session support
+                body: JSON.stringify({
+                    message: message,
+                    model: model
+                })
+            })
+            .then(r => {
+                if (!r.ok) {
+                    // Check for 401 Unauthorized
+                    if (r.status === 401) {
+                        // Token expired - refresh auth status to show login form
+                        checkAuthStatus();
+                        throw new Error('Session expired. Please log in again.');
+                    }
+                    return r.json().then(data => {
+                        throw new Error(data.error || `HTTP ${r.status}: ${r.statusText}`);
+                    });
+                }
+                return r.json();
+            })
+            .then(data => {
+                // Hide thinking spinner
+                hideThinkingSpinner();
+                
+                if (data.error) {
+                    // Check if it's a token expiration error
+                    if (data.error_code === 401 || data.error_type === 'TokenExpiredError') {
+                        // Token expired - show error and refresh auth status
+                        addMessage('Error: ' + data.error + ' Please log in again.', 'assistant', true, false);
+                        updateStatus('Session expired - please log in again');
+                        // Refresh auth status to show login form
+                        checkAuthStatus();
+                    } else if (data.error_code === 'CONNECTION_FAILED' || data.error_code === 'NETWORK_ERROR' || data.error_type === 'ConnectionError' || data.error_type === 'NetworkError') {
+                        // Connection error - show user-friendly message with suggestion
+                        let errorMsg = 'Connection Error: ' + data.error;
+                        if (data.suggestion) {
+                            errorMsg += '\n\n' + data.suggestion;
+                        }
+                        addMessage(errorMsg, 'assistant', true, false);
+                        updateStatus('Connection error - check Profinity server');
+                    } else {
+                        addMessage('Error: ' + data.error + (data.suggestion ? '\n\n' + data.suggestion : ''), 'assistant', true, false);
+                        updateStatus('Error occurred');
+                    }
+                } else {
+                    // Assistant responses are HTML (converted from markdown)
+                    addMessage(data.response, 'assistant', data.used_mcp, true);
+                    updateStatus('Response received' + (data.history_length ? ` (${data.history_length} messages in history)` : ''));
+                }
+            })
+            .catch(err => {
+                // Hide thinking spinner
+                hideThinkingSpinner();
+                
+                const errorMsg = err.message || 'Unknown error occurred';
+                addMessage('Error: ' + errorMsg, 'assistant', true, false);
+                updateStatus('Error occurred: ' + errorMsg);
+                console.error('Chat error:', err);
+            })
+            .finally(() => {
+                // Re-enable input
+                isLoading = false;
+                input.disabled = false;
+                sendButton.disabled = false;
+                sendButton.textContent = 'Send';
+                input.focus();
+            });
+        }
+        
+        function showThinkingSpinner() {
+            const container = document.getElementById('chatContainer');
+            // Remove any existing spinner
+            hideThinkingSpinner();
+            
+            const spinnerDiv = document.createElement('div');
+            spinnerDiv.id = 'thinkingSpinner';
+            spinnerDiv.className = 'thinking-spinner assistant-message';
+            spinnerDiv.innerHTML = '<div class="spinner"></div><span>Thinking...</span>';
+            container.appendChild(spinnerDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function hideThinkingSpinner() {
+            const spinner = document.getElementById('thinkingSpinner');
+            if (spinner) {
+                spinner.remove();
+            }
+        }
+        
+        function addMessage(text, type, usedMcp = false, isHtml = false) {
+            const container = document.getElementById('chatContainer');
+            // Remove thinking spinner if it exists
+            hideThinkingSpinner();
+            
+            const div = document.createElement('div');
+            div.className = `message ${type}-message`;
+            
+            // If isHtml is true, render as HTML (for assistant messages with markdown)
+            // Otherwise, render as plain text (for user messages and errors)
+            if (isHtml && type === 'assistant') {
+                div.innerHTML = text;
+            } else {
+                const textNode = document.createTextNode(text);
+                div.appendChild(textNode);
+            }
+            
+            if (usedMcp && type === 'assistant') {
+                const badge = document.createElement('span');
+                badge.className = 'mcp-badge';
+                badge.textContent = 'MCP';
+                div.appendChild(badge);
+            }
+            
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        // Handle keyboard input
+        const messageInput = document.getElementById('messageInput');
+        
+        // Allow Enter key to send
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // Handle arrow keys for message history navigation
+        messageInput.addEventListener('keydown', function(e) {
+            // Only handle arrow keys if not composing (IME) and input is not disabled
+            if (e.isComposing || isLoading) {
+                return;
+            }
+            
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                
+                // If at the end of history (new message), save current input as a draft
+                if (historyIndex === -1 && messageInput.value.trim()) {
+                    // Don't save empty or duplicate messages
+                    if (messageHistory.length === 0 || messageHistory[messageHistory.length - 1] !== messageInput.value.trim()) {
+                        messageHistory.push(messageInput.value.trim());
+                    }
+                }
+                
+                // Navigate backward in history
+                if (messageHistory.length > 0) {
+                    if (historyIndex === -1) {
+                        // Start from the last message
+                        historyIndex = messageHistory.length - 1;
+                    } else if (historyIndex > 0) {
+                        // Move to previous message
+                        historyIndex--;
+                    }
+                    // Update input with history item
+                    messageInput.value = messageHistory[historyIndex];
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                
+                // Navigate forward in history
+                if (historyIndex >= 0) {
+                    historyIndex++;
+                    
+                    if (historyIndex >= messageHistory.length) {
+                        // Reached the end, clear input for new message
+                        historyIndex = -1;
+                        messageInput.value = '';
+                    } else {
+                        // Update input with history item
+                        messageInput.value = messageHistory[historyIndex];
+                    }
+                }
+            }
+        });
+        
+        // Focus input on load
+        messageInput.focus();
+    </script>
+</body>
+</html>
+

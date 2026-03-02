@@ -1,69 +1,79 @@
 # CSharp Example Scripts
 
-This directory contains example C# scripts demonstrating various features and error cases for the Profinity scripting environment. Each script is described below:
+This directory contains example C# scripts for the Profinity scripting environment, in two groups: **detailed** (template-style, with many commented examples) and **simple** (minimal, one concept per script).
 
 ---
 
-**[CSharpStdOutExample.cs](CSharpStdOutExample.cs)**
+## Detailed script examples
 
-Demonstrates how to write a message to standard output (STDOUT) using the Profinity scripting API. Useful for testing output capture and logging.
-
----
-
-**[CSharpStdErrorExample.cs](CSharpStdErrorExample.cs)**
-
-Shows how to write a message to standard error (STDERR) using the Profinity scripting API. This is helpful for testing error output handling.
-
----
-
-**[CSharpServiceExample.cs](CSharpServiceExample.cs)**
-
-Implements a full-featured Profinity service with start, stop, pause, and continue lifecycle methods. Each method logs its action to the console, making it a good template for service-based scripts.
-
----
-
-**[CSharpSendCANMessage.cs](CSharpSendCANMessage.cs)**
-
-Demonstrates sending a CAN bus message using the Profinity CANBus API. It creates a CAN packet, sets some data fields, and sends it, serving as a reference for CAN communication.
-
----
-
-**[CSharpRunExample.cs](CSharpRunExample.cs)**
-
-A simple runnable script that prints a message and the current Profinity message to the console. Useful for basic script execution and message passing tests.
-
----
-
-**[CSharpRunFailExample.cs](CSharpRunFailExample.cs)**
-
-Illustrates a script that intentionally returns `false` from its `Run` method, simulating a failure scenario. It prints a message before failing.
-
----
+These match the templates shipped with the Profinity engine and include extensive commented examples for CAN, DBC, state, and related patterns.
 
 **[CSharpReceiveExample.cs](CSharpReceiveExample.cs)**
 
-Shows how to implement a receiver script that reacts to incoming CAN packets. It prints the received CAN ID in hexadecimal format to the console.
+Receiver script that reacts to incoming CAN packets. Includes commented examples for reading packet data, sending responses, DBC signals, script state, global state, and filtering by packet content.
+
+**[CSharpRunExample.cs](CSharpRunExample.cs)**
+
+Runnable script (run on demand or scheduled). Includes commented examples for reading CAN packets, sending CAN, DBC signals, state, global state, and script cancellation in loops.
+
+**[CSharpServiceExample.cs](CSharpServiceExample.cs)**
+
+Service script with start, stop, pause, and continue lifecycle. Includes a working `Run()` example (log every second) and a commented alternative `Run()` with an internal loop and cancellation checks.
 
 ---
+
+## Simple examples
+
+Minimal scripts, each focused on a single behaviour or scenario.
+
+**[CSharpStdOutExample.cs](CSharpStdOutExample.cs)**
+
+Writes a message to the script console (STDOUT) via the Profinity API. For testing output capture and logging.
+
+**[CSharpStdErrorExample.cs](CSharpStdErrorExample.cs)**
+
+Writes a message to standard error (STDERR). For testing error output handling.
+
+**[CSharpSendCANMessage.cs](CSharpSendCANMessage.cs)**
+
+Creates a CAN packet, sets data fields, and sends it. Minimal reference for sending CAN messages.
+
+**[CSharpReadCANMessageExample.cs](CSharpReadCANMessageExample.cs)**
+
+Gets the latest received CAN packet for a given ID via `LatestValidPacketReceivedByID`, then prints ID and data. Matches the pattern used in Profinity tests.
+
+**[CSharpReadDBCSignalExample.cs](CSharpReadDBCSignalExample.cs)**
+
+Injects a CAN packet then reads a DBC signal via `Profinity.DBC.GetDbcSignal`. Uses TestDBCComponent / STW_ANGLHP_STAT / StW_AnglHP (same as Profinity test scripts). Requires a component with that DBC loaded.
+
+**[CSharpStateExample.cs](CSharpStateExample.cs)**
+
+Sets and gets both local script state (`Profinity.State`) and global state (`Profinity.GlobalState`). Matches Profinity test script CSharpStateTest.
+
+**[CSharpGlobalStateSetExample.cs](CSharpGlobalStateSetExample.cs)**
+
+Sets a value in GlobalState for another script to read. Run with CSharpGlobalStateGetExample (or Python equivalent) to test inter-script sharing. Matches Profinity test script CSharpInterscriptSetTest.
+
+**[CSharpGlobalStateGetExample.cs](CSharpGlobalStateGetExample.cs)**
+
+Reads a value from GlobalState set by another script. Run CSharpGlobalStateSetExample first (or Python equivalent). Matches Profinity test script CSharpInterscriptGetTest.
+
+**[CSharpRunFailExample.cs](CSharpRunFailExample.cs)**
+
+Intentionally returns `false` from `Run()` to simulate a failure. For testing failure handling.
 
 **[CSharpMinimalServiceExample.cs](CSharpMinimalServiceExample.cs)**
 
-A minimal example of a Profinity service, implementing only the `OnStart` method. It prints a message when started, serving as a lightweight service template.
-
----
+Minimal service with only `OnStart` implemented. Lightweight starting point for service scripts.
 
 **[CSharpFormatErrorExample.cs](CSharpFormatErrorExample.cs)**
 
-Contains a deliberate syntax error ("classy" instead of "class") to demonstrate how the system handles format or compilation errors in scripts.
-
----
+Contains a deliberate syntax error ("classy" instead of "class") to show how the engine reports format/compilation errors.
 
 **[CSharpExecutionErrorExample.cs](CSharpExecutionErrorExample.cs)**
 
-Throws an exception during execution to simulate a runtime error. Useful for testing error handling and reporting in the scripting environment.
-
----
+Throws an exception during execution. For testing runtime error handling and reporting.
 
 **[CSharpCancelExample.cs](CSharpCancelExample.cs)**
 
-Demonstrates how to handle script cancellation. The script enters a loop, periodically checking if it has been cancelled, and prints its state until cancellation occurs.
+Loop that checks `Profinity.ScriptCancelled` and prints state until cancellation. For testing cancellation behaviour.

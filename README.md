@@ -10,7 +10,7 @@ Profinity V2, completely updates the capabilities of Prohelion's Profinity suite
 - Fully web enabled user interface that runs on desktop, mobile or Kiosk.
 - Full REST based API integration to allow easy extensions to Profinity's features and to build your own custom applications
 - Inbuilt Scripting support
-- Full ability to create custom dashboards, look and feel and add custom custom components
+- Full ability to create custom dashboards, look and feel and add custom components
 - Integration with AI and LLM tooling via MCP.
 
 ![Profinity](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/images/prohelion_bmu.png)
@@ -43,9 +43,10 @@ As well as providing extendable support for any CAN bus based solution, Profinit
 
 A set of example applications is included to help you get started with Profinity V2. These cover web, mobile, and data science use cases, demonstrating how to integrate with the Profinity API for real-time monitoring, data analysis, and custom solutions. 
 
-Example apps include 
+Example apps include
 
-- A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20)
+- A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20(Web))
+- An [Artificial Intelligence Chat web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Artificial%20Intelligence%20Chat%20(Web)) for querying Profinity via Ollama and MCP
 - A [cross-platform mobile app for a vehicle dashboard](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Vehicle%20Dashboard%20(Android%20%26%20iOS%20Mobile%20App))
 - Data science Battery Management examples for [Matlab](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Matlab%20Data%20Science%20using%20Prohelion%20BMS)
 - Data science Battery Management examples for [Python](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Python%20Data%20Science%20using%20Prohelion%20BMS)
