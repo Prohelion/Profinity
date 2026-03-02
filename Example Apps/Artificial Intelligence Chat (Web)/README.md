@@ -43,7 +43,7 @@ pip install git+https://github.com/modelcontextprotocol/python-sdk.git
 pip install -r requirements.txt
 ```
 
-Alternatively, use the startup scripts (`./run.sh` or `run.cmd`), which create a virtual environment and install all dependencies automatically. If you use the same folder on both Windows and macOS/Linux, remove the `venv` folder before running the script on the other OS so it can create an OS-specific venv.
+Alternatively, use the startup scripts (`./run.sh` or `run.cmd`), which create a virtual environment and install all dependencies automatically.
 
 ## Configuration
 
