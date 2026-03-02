@@ -25,19 +25,19 @@ As well as providing extendable support for any CAN bus based solution, Profinit
 
 | Installer | Documentation |
 | --------- | ------------- |
-| [Download Profinity V2 Early Adopter Release Installer](https://github.com/Prohelion/Profinity_V2_Early_Adopter_Release/releases/latest/download/Profinity.Install.msi) | [Windows Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Windows_Installation.html) |
+| [Download Profinity V2 Installer](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.Install.msi) | [Windows Installation Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Installation/Windows_Installation.html) |
 
 ### Native Unix / macOS:
 
 | Installer | Documentation |
 | --------- | ------------- |
-| [Download Profinity V2 Early Adopter Release Zip](https://github.com/Prohelion/Profinity_V2_Early_Adopter_Release/releases/latest/download/Profinity.zip) | [Native macOS / Unix Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Zip_Installation.html) |
+| [Download Profinity V2 Zip](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.zip) | [Native macOS / Unix Installation Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Installation/Zip_Installation.html) |
 
 ### Docker
 
 | Documentation |
 | ------------- |
-| [Docker Installation Documentation](https://docs.prohelion.com/Profinity/Profinity_Version2/Installation/Docker_Installation.html) |
+| [Docker Installation Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/Installation/Docker_Installation.html) |
 
 ## Example Profinity Extensions
 
