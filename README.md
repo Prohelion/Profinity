@@ -10,7 +10,7 @@ Profinity V2, completely updates the capabilities of Prohelion's Profinity suite
 - Fully web enabled user interface that runs on desktop, mobile or Kiosk.
 - Full REST based API integration to allow easy extensions to Profinity's features and to build your own custom applications
 - Inbuilt Scripting support
-- Full ability to create custom dashboards, look and feel and add custom custom components
+- Full ability to create custom dashboards, look and feel and add custom components
 - Integration with AI and LLM tooling via MCP.
 
 ![Profinity](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/images/prohelion_bmu.png)
@@ -41,17 +41,27 @@ As well as providing extendable support for any CAN bus based solution, Profinit
 
 ## Example Profinity Extensions
 
-A set of example applications is included to help you get started with Profinity V2. These cover web, mobile, and data science use cases, demonstrating how to integrate with the Profinity API for real-time monitoring, data analysis, and custom solutions. 
+This repository includes example applications and example scripts to help you get started with Profinity V2.
 
-Example apps include
+### Example applications
 
-- A [battery charging station web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Charge%20for%20Power%20using%20Square%20(Web))
-- An [Artificial Intelligence Chat web app](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Artificial%20Intelligence%20Chat%20(Web)) (MCP example) for querying Profinity via Ollama and the Model Context Protocol
-- A [cross-platform mobile app for a vehicle dashboard](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Vehicle%20Dashboard%20(Android%20%26%20iOS%20Mobile%20App))
-- Data science Battery Management examples for [Matlab](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Matlab%20Data%20Science%20using%20Prohelion%20BMS)
-- Data science Battery Management examples for [Python](https://github.com/Prohelion/Profinity/tree/master/Example%20Apps/Python%20Data%20Science%20using%20Prohelion%20BMS)
+The [Example Apps](Example%20Apps/README.md) directory contains sample applications that integrate with the Profinity API:
 
-There is also a range of [example scripts](https://github.com/Prohelion/Profinity/tree/master/Example%20Scripts) provided to get you started with Profinity scripting.
+- **[Battery Charging Station](Example%20Apps/Charge%20for%20Power%20using%20Square%20(Web)/README.md)** (web) — Integrates Profinity with Square for a battery-powered charging station
+- **[Artificial Intelligence Chat](Example%20Apps/Artificial%20Intelligence%20Chat%20(Web)/README.md)** (web, MCP) — Chat interface for querying Profinity via Ollama and the Model Context Protocol
+- **[Vehicle Dashboard](Example%20Apps/Vehicle%20Dashboard%20(Android%20%26%20iOS%20Mobile%20App)/README.md)** (mobile) — Cross-platform app for real-time WaveSculptor and BMS data
+- **Data science** — [Matlab](Example%20Apps/Matlab%20Data%20Science%20using%20Prohelion%20BMS/README.md) and [Python](Example%20Apps/Python%20Data%20Science%20using%20Prohelion%20BMS/README.md) examples for BMS data and cell voltage plotting
+
+All of these use the supplied example PET Profile and CAN log for demo data.
+
+### Example scripts
+
+The [Example Scripts](Example%20Scripts/README.md) directory contains C# and Python scripts that run inside the Profinity scripting engine. They include:
+
+- **Detailed examples** — Receive, Run, and Service templates with commented patterns for CAN, DBC, state, and cancellation
+- **Simple examples** — Minimal scripts for one concept each (e.g. send CAN, read CAN, read DBC signal, script state, global state)
+
+Use them to extend Profinity with custom logic or as a reference for the scripting API. See the [C#](Example%20Scripts/CSharp/README.md) and [Python](Example%20Scripts/Python/README.md) subdirectory READMEs for a full list.
 
 ## Documentation
 
