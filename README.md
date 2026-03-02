@@ -13,7 +13,7 @@ Profinity V2, completely updates the capabilities of Prohelion's Profinity suite
 - Full ability to create custom dashboards, look and feel and add custom custom components
 - Integration with AI and LLM tooling via MCP.
 
-![Profinity](http://localhost:8000/Profinity_Software/Profinity_Version_2/images/prohelion_bmu.png)
+![Profinity](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/images/prohelion_bmu.png)
 
 Profinity can connect to CAN Bus adapters, which translate CAN Bus traffic from your network to the PC, you can send and receive CAN Bus messages, log messages and replay them.
 
