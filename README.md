@@ -2,7 +2,7 @@
 
 Profinity V2 is a system management platform developed by Prohelion designed to be the most modern CAN bus management and development platform.
 
-You can find the [Prohelion Documentation](https://docs.prohelion.com/Profinity/Overview.html) on the docs site for the [latest Profinity release](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.install.msi).
+You can find the [Prohelion Documentation](https://docs.prohelion.com/Profinity_Software/Profinity_Version_2/index.html) on the docs site, or click to download the [latest Profinity release](https://github.com/Prohelion/Profinity/releases/latest/download/Profinity.install.msi) for Windows.
 
 Profinity V2, completely updates the capabilities of Prohelion's Profinity suite by adding:
 
