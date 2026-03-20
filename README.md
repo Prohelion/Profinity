@@ -70,6 +70,5 @@ Full documentation for Profinity V2 is available at:
 
 ## Support
 
-- Visit our [Support Portal](https://support.prohelion.com/)
+- Visit our [Support Portal](https://prohelion.atlassian.net/servicedesk/customer/portals)
 - [Contact Us](https://prohelion.com/contact/)
-- Check our [FAQs](https://docs.prohelion.com/FAQs/index.html)
